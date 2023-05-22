@@ -10,8 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String? email;
-  String? password;
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
   bool isObscureText = true;
 
   @override
@@ -51,7 +51,8 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
-                  onChanged: (_)=> email = _,
+                  controller: emailController,
+                  onChanged: (_)=> debugPrint(emailController as String?),
                   textAlign: TextAlign.start,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.020),
@@ -75,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
-                  onChanged: (_)=> password = _,
+                  controller: passwordController,
+                  onChanged: (_)=> debugPrint(passwordController.toString()),
                   obscureText: isObscureText,
                   textAlign: TextAlign.start,
                   decoration: InputDecoration(
@@ -116,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   )
                 ),
-                onPressed: ()=> print("${email!} ${password!}"),
+                onPressed: ()=> debugPrint("${emailController!} ${passwordController!}"),
                 child: Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width * 0.7,
