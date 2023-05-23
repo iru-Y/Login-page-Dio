@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
           secondary: Colors.white,
           background: bodyColor,
         ),
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           displayLarge: TextStyle(color: Colors.white),
           displayMedium: TextStyle(color: Colors.white),
           displaySmall: TextStyle(color: Colors.white),

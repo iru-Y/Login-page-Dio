@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_page_dio/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -10,8 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  var emailController = TextEditingController(text: "");
+  var passwordController = TextEditingController(text: "");
   bool isObscureText = true;
 
   @override
@@ -41,18 +42,17 @@ class _LoginPageState extends State<LoginPage> {
                   fontSize: 35
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               const Text("Faça seu login e make the change._",
               style: TextStyle(
                 fontSize: 18
               ),
               ),
-              const SizedBox(height: 50),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.050),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
                   controller: emailController,
-                  onChanged: (_)=> debugPrint(emailController as String?),
                   textAlign: TextAlign.start,
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.020),
@@ -72,12 +72,11 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.030),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextField(
                   controller: passwordController,
-                  onChanged: (_)=> debugPrint(passwordController.toString()),
                   obscureText: isObscureText,
                   textAlign: TextAlign.start,
                   decoration: InputDecoration(
@@ -118,7 +117,16 @@ class _LoginPageState extends State<LoginPage> {
                     )
                   )
                 ),
-                onPressed: ()=> debugPrint("${emailController!} ${passwordController!}"),
+                onPressed: ()=> {
+                      if(emailController.text.trim() == "" &&
+                          passwordController.text.trim() == ""){
+                          Navigator.pushReplacement(
+                              context, MaterialPageRoute(
+                              builder: (context)=> const MainPage()
+                          ))
+                      }else{
+                          ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Login ou senha incorreto")))}},
                 child: Container(
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width * 0.7,
@@ -127,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.1),
               TextButton(
-                  onPressed: ()=> {},
+                onPressed: ()=> {},
                   child: const Text("Esqueci minha senha",
                     style: TextStyle(color: Colors.amberAccent),
                   )
