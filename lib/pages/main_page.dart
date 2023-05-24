@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_page_dio/pages/dados_cadastrais.dart';
+import 'package:login_page_dio/pages/page_1.dart';
+import 'package:login_page_dio/pages/page_2.dart';
+import 'package:login_page_dio/pages/page_3.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -9,6 +12,9 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  PageController pageController = PageController(initialPage: 0);
+  int currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,23 +26,49 @@ class _MainPageState extends State<MainPage> {
           child: Container(
             color: Theme.of(context).colorScheme.primary,
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
+                  const Divider(color: Colors.white,),
                   InkWell(
                     onTap: ()=> Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context)=> DadosCadastrais())),
-                      child: Text("Dados cadastrais")),
-                  SizedBox(height: 30),
-                  Text("Termos de uso e privacidade"),
-                  SizedBox(height: 30),
-                  Text("Configurações")
+                        MaterialPageRoute(builder: (context)=> const DadosCadastrais())),
+                      child: const Text("Dados cadastrais")),
+                  const SizedBox(height: 30),
+                  const Divider(color: Colors.white,),
+                  const Text("Termos de uso e privacidade"),
+                  const SizedBox(height: 30),
+                  const Divider(color: Colors.white,),
+                  const Text("Configurações"),
+                  const SizedBox(height: 30),
+                  const Divider(color: Colors.white,),
                 ],
               ),
             ),
           ),
+        ),
+        body: PageView(
+          controller: pageController,
+          onPageChanged: (_)=> setState(() {
+            currentIndex = _;
+          }),
+          scrollDirection: Axis.vertical,
+          children: const [
+            Page1(),
+            Page2(),
+            Page3()
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (_)=> pageController.jumpToPage(_),
+          currentIndex: currentIndex,
+          items: const [
+            BottomNavigationBarItem(label: "Pag1", icon: Icon(Icons.home)),
+            BottomNavigationBarItem(label: "Pag2", icon: Icon(Icons.add)),
+            BottomNavigationBarItem(label: "Pag3", icon: Icon(Icons.person))
+          ],
         ),
       ),
     );
