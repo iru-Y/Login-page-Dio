@@ -79,21 +79,20 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                 },
               ),
               const TextLabel(text: "Nível de experiência"),
-              Column(
-                children: niveis
-                    .map((_) => RadioListTile(
-                  dense: true,
-                    title: Text(_),
-                    selected: nivelSelecionado == _,
-                    value: niveis,
-                    groupValue: _,
-                    onChanged: (_){
-                    setState(() {
-                      nivelSelecionado = _.toString();
-                    });
-                    }
-                )).toList(),
-              ),
+            Column(
+              children: niveis.map((_) => RadioListTile(
+                dense: true,
+                title: Text(_),
+                selected: nivelSelecionado == _,
+                value: _,
+                groupValue: nivelSelecionado,
+                onChanged: (_) {
+                  setState(() {
+                    nivelSelecionado = _;
+                  });
+                },
+              )).toList(),
+            ),
               const TextLabel(text: "Linguagens preferidas"),
               Column(
                   children: linguagens
@@ -107,7 +106,8 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                     setState(() {
                       linguagemSelecionada.add(_);
                     });
-                      }else{setState(() {
+                      }else{
+                      setState(() {
                       linguagemSelecionada.remove(_);
                     });
                       }
