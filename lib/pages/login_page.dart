@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login_page_dio/pages/main_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -29,10 +30,8 @@ class _LoginPageState extends State<LoginPage> {
                   Expanded(child: Container()),
                   Expanded(
                     flex: 7,
-                    child: Image.asset("assets/images/dio_logo.png"
-                    ),
-                  ),
-                  Expanded(child: Container()),
+                    child: SvgPicture.asset("assets/images/dio_logo.svg")),
+                    Expanded(child: Container()),
                 ],
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.03),

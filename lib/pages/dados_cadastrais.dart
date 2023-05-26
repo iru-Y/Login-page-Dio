@@ -24,6 +24,22 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
   var linguagensRepository = LinguagensRepository();
   var linguagens = [];
   var linguagemSelecionada = [];
+  double salarioEscolhido= 0;
+  int tempoExperiencia = 0;
+  bool salvar = false;
+
+  List<DropdownMenuItem<int>> returnItens(_) {
+    var itens = <DropdownMenuItem<int>>[];
+    for (var i = 0; i <= _; i++) {
+      itens.add(DropdownMenuItem(
+        value: i,
+        child: Text(i.toString()),
+      ));
+    }
+    return itens;
+  }
+
+
 
   @override
   void initState() {
@@ -51,7 +67,11 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: salvar ? Center(
+        child: CircularProgressIndicator(
+          color: Theme.of(context).colorScheme.primary,
+        ),
+      ) : SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric( horizontal: MediaQuery.of(context).size.width * 0.016),
           child: Column(
@@ -111,11 +131,55 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                       linguagemSelecionada.remove(_);
                     });
                       }
-
                   }),).toList()),
+               TextLabel(text: "Pretenção salarial R\$ ${salarioEscolhido.round()}"),
+              Slider(
+                  min: 0,
+                  max: 10000,
+                  value: salarioEscolhido,
+                  onChanged: (_){
+                    setState(() {
+                      salarioEscolhido = _;
+                    });
+                  }),
+              const TextLabel(text: "Tempo de experiência"),
+              DropdownButton(
+                  dropdownColor: Theme.of(context).colorScheme.primary,
+                  isDense: true,
+                  value: tempoExperiencia,
+                  items: returnItens(50),
+                  onChanged: (_){
+                    setState(() {
+                      tempoExperiencia = int.parse(_.toString());
+                    });
+                  }),
               TextButton(
                   onPressed: () {
-
+                    if(nomeController.text.length < 3){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("Preencha o campo nome corretamente"))
+                      );
+                      return;
+                    }
+                    if(dateNascimento == null){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Preencha a data de nascimento"))
+                      );
+                      return;
+                    }
+                    if(dateNascimento == null){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Preencha a data de nascimento"))
+                      );
+                    }
+                    setState(() {
+                      salvar = true;
+                    });
+                    Future.delayed(const Duration(seconds: 2)); (){
+                      setState(() {
+                        salvar = false;
+                      });
+                    }
                   },
                   child: const Text("Salvar")
               ),
