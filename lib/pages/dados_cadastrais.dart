@@ -179,7 +179,7 @@ class _DadosCadastraisState extends State<DadosCadastrais> {
                       setState(() {
                         salvar = false;
                       });
-                    }
+                    };
                   },
                   child: const Text("Salvar")
               ),
