@@ -33,10 +33,9 @@ class _CardPageState extends State<CardPage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        cardDetailModel == null ? Container(
+        cardDetailModel == null ? SizedBox(
           height: MediaQuery.of(context).size.height * 0.01,
           child: const LinearProgressIndicator(
-
           ),
         ) :
         SizedBox(

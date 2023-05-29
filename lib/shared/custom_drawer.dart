@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:login_page_dio/pages/configuracoes_page.dart';
 import 'package:login_page_dio/pages/login_page.dart';
 import 'package:login_page_dio/pages/main_page.dart';
+import 'package:login_page_dio/pages/random_numbers_page.dart';
 
 import '../pages/dados_cadastrais.dart';
 
@@ -12,6 +14,7 @@ class CustomDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final _sizedBoxColumnDrawer = MediaQuery.of(context).size.height * 0.03;
+    final _sizedBoxRowDrawer = MediaQuery.of(context).size.width * 0.01;
 
     return  Drawer(
       child: Container(
@@ -55,19 +58,18 @@ class CustomDrawer extends StatelessWidget {
                 accountName: const Text("pistoled999"),
                 accountEmail: const Text("yuri_matteus@hotmail.com")
             ),
-            Row(
-              children: [
-                const Icon(Icons.person,
-                  color: Colors.white,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                      onTap: ()=> Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context)=> const DadosCadastrais())),
-                      child: const Text("Dados cadastrais")),
-                ),
-              ],
+            InkWell(
+                onTap: ()=> Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context)=> const DadosCadastrais())),
+              child: Row(
+                children: [
+                  Icon(Icons.person,
+                    color: Colors.white,
+                  ),
+                  SizedBox(width: _sizedBoxRowDrawer),
+                  Text("Dados cadastrais"),
+                ],
+              ),
             ),
             SizedBox(height: _sizedBoxColumnDrawer),
             const Divider(color: Colors.white),
@@ -88,28 +90,47 @@ class CustomDrawer extends StatelessWidget {
                     ),
                   )
               );},
-              child: const Row(
+              child: Row(
                 children: [
-                  Icon(Icons.info,
+                  const Icon(Icons.info,
                     color: Colors.white,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text("Termos de uso e privacidade"),
+                    padding: EdgeInsets.all(_sizedBoxRowDrawer),
+                    child: const Text("Termos de uso e privacidade"),
                   ),
                 ],
               ),
             ),
             SizedBox(height: _sizedBoxColumnDrawer),
             const Divider(color: Colors.white),
-            const Row(
-              children: [
-                Icon(Icons.settings, color: Colors.white,),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text("Configurações"),
-                ),
-              ],
+             InkWell(
+               onTap: ()=> Navigator.pushReplacement(context,
+               MaterialPageRoute(builder: (_)=> const ConfiguracoesPage())
+               ),
+               child: Row(
+                children: [
+                  const Icon(Icons.settings, color: Colors.white,),
+                  Padding(
+                    padding: EdgeInsets.all(_sizedBoxRowDrawer),
+                    child: const Text("Configurações"),
+                  ),
+                ],
+            ),
+             ),
+            SizedBox(height: _sizedBoxColumnDrawer),
+            const Divider(color: Colors.white),
+            InkWell(
+              onTap: ()=> Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_)=> const RandomNumberPage())),
+              child: Row(
+                children: [
+                  Icon(Icons.numbers, color: Colors.white),
+                  SizedBox(width: _sizedBoxRowDrawer),
+                  Text("Gerador de números aleatórios"),
+                ],
+              ),
             ),
             SizedBox(height: _sizedBoxColumnDrawer),
             const Divider(color: Colors.white),
@@ -128,10 +149,10 @@ class CustomDrawer extends StatelessWidget {
                       ],
                     ),
                     actions: [
-                      TextButton(onPressed: ()=> Navigator.of(context).pushReplacement(
+                      TextButton(onPressed: ()=> Navigator.pushReplacement(_,
                           MaterialPageRoute(builder: (_)=>LoginPage())),
                           child: Text("Sim")),
-                      TextButton(onPressed: ()=> Navigator.of(context).pop(),
+                      TextButton(onPressed: ()=> Navigator.pop(_),
                           child: Text("Não"))
                     ],
                     ),
@@ -140,7 +161,7 @@ class CustomDrawer extends StatelessWidget {
                 children: [
                   Icon(Icons.exit_to_app, color: Colors.white),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(_sizedBoxRowDrawer),
                     child: Text("Sair"),
                   ),
                 ],
