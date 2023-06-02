@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_page_dio/pages/main_page.dart';
+import 'package:login_page_dio/main_page.dart';
 import 'package:login_page_dio/repositories/nivel_exp_repository.dart';
 import 'package:login_page_dio/repositories/linguagens_repository.dart';
 

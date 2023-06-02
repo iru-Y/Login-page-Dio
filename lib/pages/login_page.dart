@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:login_page_dio/pages/main_page.dart';
+import 'package:login_page_dio/main_page.dart';
 
 class LoginPage extends StatefulWidget {
 

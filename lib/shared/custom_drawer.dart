@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login_page_dio/pages/configuracoes_page.dart';
 import 'package:login_page_dio/pages/login_page.dart';
-import 'package:login_page_dio/pages/main_page.dart';
+import 'package:login_page_dio/main_page.dart';
 import 'package:login_page_dio/pages/random_numbers_page.dart';
 
 import '../pages/dados_cadastrais.dart';

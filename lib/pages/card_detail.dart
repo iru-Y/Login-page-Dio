@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:login_page_dio/pages/card_page.dart';
-import 'package:login_page_dio/pages/main_page.dart';
+import 'package:login_page_dio/main_page.dart';
 
 import '../model/card_detail_model.dart';
 
